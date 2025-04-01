@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Puuttuvat tuotteet:</title>
+  </head>
+
+<body>
+    <h1>{{ puuttuvat.tuote }}</h1>
+    {% if session.username %}
+    <p>
+        <a href="/edit_puuttuvattuotteet/{{ puuttuva.id }}">Muokkaa</a>
+      </p>
+      {% endif %}
+    <p>
+        Päivämäärä kun tuote puuttui: {{ puuttuvat.paiva }}
+    </p>
+    <p>
+        <a href="/">Takaisin</a>
+    </p>
+</body>
+
+</html>

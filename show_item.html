@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ item.title }}</title>
+</head>
+
+<body>
+    <h1>{{ item.title }}</h1>
+    {% if session.user_id == item.user_id %}
+    <p>
+      <a href="/edit_yksari/{{ item.id }}">Muokkaa</a>
+    </p>
+    {% endif %}
+    <p>
+        {{ item. description }}
+    </p>
+    <p>
+        Varauksen lähtöhinta: {{ item.start_price }} €
+    </p>
+    <p>
+        Luonut varauksen: {{ item.username }}
+    </p>
+    <p>
+        Varauksen päivämäärä: {{ item.pvm }}
+    </p>
+    <p>
+        <a href="/">Takaisin</a>
+    </p>
+</body>
+
+</html>
