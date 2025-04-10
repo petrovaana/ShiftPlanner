@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Poista yksityistilaisuus:</title>
+</head>
+
+<body>
+    <h1>yksityistilaisuuden poistaminen</h1>
+    <p>yksityistilaisuus: {{item.title}}</p>
+    <p>Halutako varmasti poistaa tämän?</p>
+  <form action="/remove_item/{{ item.id }}" method="post">
+    <input type="submit" name="remove" value="Poista tiedot">
+    <input type="submit" name="back" value="Palaa takaisin">
+  </form>
+</body>
+
+</html>

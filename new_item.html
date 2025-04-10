@@ -2,29 +2,48 @@
 <html>
 
 <head>
-  <title>Uusi yksityistilaisuus</title>
+  <title>Uuden yksityistilaisuuden kirjaaminen:</title>
 </head>
 
 <body>
-    <h1>Uusi yksityistilaisuus</h1>
-  <form action="/create_yksari" method="post">
+    <h1>Uusi yksityistilaisuus:</h1>
+  <form action="/create_item" method="post">
     <p>
       Varauksen nimi: <br />
-      <input type="text" name="title" />
-    </p>
-
-    <p>
-        Tilaisuuden tiedot (maksutapa, piikki tuotteet): <br />
-        <textarea name="description" rows="8" cols="60"></textarea>
+      <input type="text" name="title" maxlength="50" required />
     </p>
     <p>
-        Varauksen lähtöhinta: <br />
-        <input type="text" name="start_price" size="8" /> €
+        Tilaisuuden tiedot (Piikille sovitut tuotteet): <br />
+        <textarea name="description" rows="8" cols="60" maxlength="1000" required ></textarea>
     </p>
     <p>
         Varauksen päivämäärä: <br />
-        <input type="date" name="pvm" />
+        <input type="date" name="pvm" required />
     </p>
+    {% for class in classes %}
+    <p>
+        {{ class }}: <br />
+        <select name="Classes">
+            <option value="">(valitse)</option>
+        {% for option in classes[class] %}
+            <option value="{{ class }}:{{ option }}">{{ option }}</option>     
+        {% endfor %}   
+    </select>
+</p>
+    {% endfor %}
+    <p>
+        Pax: <br />
+        <input type="number" name="pax" required />
+    </p>
+    <p>
+        Varauksen lähtöhinta: <br />
+        <input type="number" name="start_price" size="8" pattern="[1-9][0-9]{0,4}" required /> €
+    </p>
+    <p>
+        Maksutapa: <br />
+        <input type="text" name="maksutapa" required />
+    </p>
+
     <input type="submit" value="Kirjaa yksityistilaisuus" />
   </form>
 </body>

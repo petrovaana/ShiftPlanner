@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Muokkaa yksityistilaisuuden tietoja</title>
+</head>
+
+<body>
+    <h1>Muokkaa tilaisuuden tietoja:</h1>
+  <form action="/update_item" method="post">
+    <p>
+      Varauksen nimi: <br />
+      <input type="text" name="title" value="{{ item.title }}" maxlength="50" required />
+    </p>
+    <p>
+        Tilaisuuden tiedot (piikkiin menevät tuotteet): <br />
+        <textarea name="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }} </textarea>
+    </p>
+
+    <p>
+        Varauksen päivämäärä: <br />
+        <input type="date" name="pvm" value="{{ item.pvm }}" required/>
+    </p>
+    <p>
+      Pax: <br />
+      <input type="number" name="pax" value="{{ item.pax }}" required/>
+    </p>
+    <p>
+        Varauksen lähtöhinta: <br />
+        <input type="number" name="start_price" size="8" value="{{ item.start_price }}" required/> €
+    </p>
+    <p>
+      Varauksen maksutapa: <br />
+      <input type="text" name="maksutapa" value="{{ item.maksutapa }}" required/>
+    </p>
+    {% for class in all_classes %}
+    <p>
+        {{ class }}: <br />
+        <select name="Classes">
+            <option value="">(valitse)</option>
+        {% for option in all_classes[class] %}
+          {% if classes[class] == option %}
+            <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+            {% else %}
+            <option value="{{ class }}:{{ option }}" >{{ option }}</option>
+            {% endif %}
+        {% endfor %}   
+    </select>
+</p>
+    {% endfor %}
+    <input type="hidden" name="item_id" value="{{ item.id }}" />
+    <input type="submit" value="Päivitä tilaisuuden tiedot" />
+  </form>
+</body>
+
+</html>

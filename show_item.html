@@ -9,21 +9,51 @@
     <h1>{{ item.title }}</h1>
     {% if session.user_id == item.user_id %}
     <p>
-      <a href="/edit_yksari/{{ item.id }}">Muokkaa</a>
+      <a href="/edit_item/{{ item.id }}">Muokkaa</a>
+      <a href="/remove_item/{{ item.id }}">Poista</a>
     </p>
     {% endif %}
     <p>
-        {{ item. description }}
+        Tilaisuuden tiedot: {{ item.description }}
+    </p>
+    <p>
+        Varauksen päivämäärä: {{ item.pvm }}
+    </p>
+    <p>
+        Pax: {{ item.pax }}
     </p>
     <p>
         Varauksen lähtöhinta: {{ item.start_price }} €
     </p>
     <p>
-        Luonut varauksen: {{ item.username }}
+        Varauksen maksutapa: {{ item.maksutapa }}
     </p>
     <p>
-        Varauksen päivämäärä: {{ item.pvm }}
+        Luonut varauksen: <a href="/user/{{ item.user_id }}">{{ item.username }}</a>
     </p>
+    {% if classes %}
+    <p>
+        Käytössä oleva tila: 
+        <ul>
+            {% for class in classes %}
+            <li>{{ class.title }}: {{ class.value }}</li>
+            {% endfot %}
+        </ul>
+    </p>
+    {% endif %}
+    <h2>Muokkauksista tiedot:</h2>
+    <ul>
+        {% for muokkaus in muokkaukset %}
+        <li>{{ muokkaukset.description }}, <a href="/user/{{ muokkaukset.user_id }}">{{muokkaukset.username}}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Milloin ja kuka on muokannut:</h2>
+    <from action="/create_tiedot" method="post">
+        Tiedot: <br />
+        <textarea name="description" rows="8" cols="60" maxlength="1000" required ></textarea>
+        <input type="hidden" name="item_id" value="{{ item.id }}" />
+        <input type="submit" value="Kirjaa uudet tiedot" />
+    </from>
     <p>
         <a href="/">Takaisin</a>
     </p>
