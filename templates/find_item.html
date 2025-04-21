@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}Search for an event:{% endblock %}
+
+{% block content %}
+<h2>Search for an event:</h2>
+
+<form action="/find_item" method="get">
+    <p>
+        <label for="query">Keyword</label>:
+        <input type="text" name="query" id="query" value="{{ query }}">
+    </p>
+    <input type="submit" value="Submit">
+</form>
+
+
+{% if query %}
+    {% if results %}
+        <h2>Results:</h2>
+        <ul>
+            {% for item in results %}
+                <li><a href="/item/{{ item.id }}">{{ item.title }}</a> - {{ item.date }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No events found for "{{ query }}".</p>
+    {% endif %}
+{% endif %}
+
+<h2>All Events:</h2>
+<ul>
+    {% for item in items %}
+        <li><a href="/item/{{ item.id }}">{{ item.title }}</a> - {{ item.date }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

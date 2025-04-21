@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}Search for a missing item:{% endblock %}
+
+{% block content %}
+<h2>Search for a missing item:</h2>
+
+<form action="/find_missing" method="get">
+    <p>
+        <label for="query">Item</label>:
+        <input type="text" name="query" value="{{ query }}">
+    </p>
+    <input type="submit" value="Submit">
+</form>
+
+{% if query %}
+<h2>Results:</h2>
+
+    {% if results %}
+        <ul>
+            {% for missing in results %}
+            <li><a href="/missing/{{ missing.id }}">{{ missing.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No results found for "{{ query }}"</p>
+    {% endif %}
+{% endif %}
+
+<h2>All missind items:</h2>
+<ul>
+    {% for missing in missing_items %}
+        <li><a href="/missing/{{ missing.id }}">{{ missing.title }}</a> - {{ missing.date }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock %}

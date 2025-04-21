@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}{{ missing.title }}{% endblock %}
+
+{% block content %}
+  <h2>{{ missing.title }}</h2>
+  {% if session.user_id == missing.user_id %}
+  <p>
+    <a href="/remove_missing/{{ missing.id }}">Delete</a>
+  </p>
+  {% endif %}
+  <p>
+    Date when registered: {{ missing.date }}
+  </p>
+  {% endblock %}

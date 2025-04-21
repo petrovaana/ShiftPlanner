@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}ShiftPlanner{% endblock %}
+
+{% block content %}
+
+{% if session.user_id %}
+  <div class="box">
+    <h2>Private Events:</h2>
+    <ul>
+      {% for item in items%}
+      <li><a href="/item/{{ item.id}}" >{{ item.title }} - {{ item.date }}</a></li>
+      {% endfor %}
+  </ul>
+</div>
+
+<div class="box">
+  <h2>Missing items:</h2>
+  <ul>
+    {% for missing in missing_items%}
+    <li><a href="/missing/{{ missing.id}}" >{{ missing.title }} - {{ missing.date }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+{% endblock %}

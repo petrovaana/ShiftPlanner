@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}Edit Private Event{% endblock %}
+
+{% block content %}
+
+<h2>{{ item.title }}</h2>
+<h3>Edit private event's information:</h3>
+
+<form action="/update_item" method="post">
+  <p>
+    <label for="title">Title</label>: <br />
+    <input type="text" name="title" id="title" value="{{ item.title }}" maxlength="50" required />
+  </p>
+  <p>
+    <label for="description">Description</label>: <br />
+    <textarea name="description" id="description" rows="8" cols="60" maxlength="1000" required>{{ item.description }}</textarea>
+  </p>
+  <p>
+    <label for="booked_space">Booked Space</label>: <br />
+    <input type="text" name="booked_space" id="booked_space" value="{{ item.booked_space }}" maxlength="50" required />
+  </p>
+  <p>
+    <label for="date">Date</label>: <br />
+    <input type="date" name="date" value="{{ item.date }}" required/>
+  </p>
+  <p>
+    <label for="guests">Guests</label>: <br />
+    <input type="number" name="guests" value="{{ item.guests }}" min=1 step=1 required/>
+  </p>
+  <p>
+    <label for="start_price">Start Price</label>: <br />
+    <input type="number" name="start_price" size="8" value="{{ item.start_price }}" required/> €
+  </p>
+  <p>
+    <label for="payment">Payment</label>: <br />
+    <input type="text" name="payment" value="{{ item.payment }}" required/>
+  </p>
+  <input type="hidden" name="item_id" value="{{ item.id }}" />
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <input type="submit" value="Update" />
+  </form>
+  <p>
+    <a href="/item/{{ item.id }}">Back</a>
+  </p>
+  {% endblock %}

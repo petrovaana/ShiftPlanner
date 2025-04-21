@@ -1,0 +1,41 @@
+<!{% extends "layout.html" %}
+
+{% block title %}Create a new private event:{% endblock %}
+
+{% block content %}
+<h2>Create a new private event:</h2>
+
+<form action="/create_item" method="post">
+  <p>
+    <label for="title">Title:</label> <br />
+    <input type="text" name="title" maxlength="50" required />
+  </p>
+  <p>
+    <label for="description">Description</label>: <br />
+    <textarea name="description" rows="8" cols="60" maxlength="1000" required ></textarea>
+  </p>
+  <p>
+    <label for="booked_space">Booked space</label>: <br />
+    <input type="text" name="booked_space" maxlength="50" required />
+  </p>
+  <p>
+    <label for="date">Date</label>: <br />
+    <input type="date" name="date" required />
+  </p>
+  <p>
+    <label for="guests">Guests</label>: <br />
+    <input type="number" name="guests" min=1 step=1 required />
+  </p>
+  <p>
+    <label for="start_price">Start price</label>: <br />
+    <input type="number" name="start_price" size="8" pattern="[1-9][0-9]{0,4}" required /> €
+  </p>
+  <p>
+    <label for="payment">Payment</label>: <br />
+    <input type="text" name="payment" required />
+  </p>
+
+  <input type="submit" value="create" />
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  </form>
+  {% endblock %}

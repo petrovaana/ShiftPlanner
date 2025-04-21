@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}New missing item:{% endblock %}
+
+{% block content %}
+<h2>New missing item:</h2>
+<form action="/create_missing" method="post">
+  <p>
+    <label for="title">Missing item:</label>: <br />
+    <input type="text" name="title" maxlength="50" required />
+  </p>
+  <p>
+    <label for="date">Date when registered:</label>: <br />
+    <input type="date" name="date" required />
+  </p>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <input type="submit" value="Submit" />
+</form>
+{% endblock %}
