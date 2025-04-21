@@ -8,29 +8,26 @@ CREATE TABLE items (
     id INTEGER PRIMARY KEY,
     title TEXT,
     description TEXT,
-    pax INTEGER,
-    maksutapa TEXT,
+    booked_space TEXT,
+    guests INTEGER,
+    payment TEXT,
     start_price INTEGER,
-    pvm DATE,
+    date DATE,
     user_id INTEGER REFERENCES users
 );
 
-CREATE TABLE muokkaukset (
+CREATE TABLE edits (
     id INTEGER PRIMARY KEY,
     item_id INTEGER REFERENCES items,
     user_id INTEGER REFERENCES users,
     description TEXT
 );
 
-CREATE TABLE classes (
+CREATE TABLE missing_items (
     id INTEGER PRIMARY KEY,
     title TEXT,
-    value TEXT
+    date DATE,
+    user_id INTEGER REFERENCES users
 );
-
-CREATE TABLE item_classes (
-    id INTEGER PRIMARY KEY,
-    item_id INTEGER REFERENCES items,
-    title TEXT,
     value TEXT
 );
