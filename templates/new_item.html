@@ -35,7 +35,8 @@
     <input type="text" name="payment" required />
   </p>
 
-  <input type="submit" value="create" />
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <input type="submit" value="create" />
+  
   </form>
   {% endblock %}
