@@ -9,4 +9,15 @@ This application is made specifically for restaurants and other companies possib
   - Users are able to comment on private events if something notable happened/changed during the event, and as well delete the event if needed.
   - Both search pages show the whole lists of all added private events or missing items.
 
-Startup instructions: 
+Startup instructions:
+
+Install flask libraby:
+pip install flask
+
+Create the database table and insert initial data:
+sqlite3 database.db < schema.sql
+
+Start the application like this:
+venv\Scripts\activate
+python3 -m flask run
+
