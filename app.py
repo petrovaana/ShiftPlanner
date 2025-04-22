@@ -45,6 +45,7 @@ def show_user(user_id):
 
 @app.route("/missing/<int:missing_id>")
 def show_missing(missing_id):
+    require_login()
     missing = missing_items.get_missings(missing_id)
     if not missing:
         abort(404)
@@ -118,6 +119,7 @@ def remove_missing(missing_id):
 
 @app.route("/find_missing")
 def find_missing():
+    require_login()
     query = request.args.get("query")
     if query:
         results = missing_items.find_missing(query)
@@ -130,6 +132,7 @@ def find_missing():
 
 @app.route("/item/<int:item_id>")
 def show_item(item_id):
+    require_login()
     item = items.get_item(item_id)
     if not item:
         abort(404)
@@ -284,6 +287,7 @@ def remove_item(item_id):
         
 @app.route("/find_item")
 def find_item():
+    require_login()
     query = request.args.get("query")
     if query:
         results = items.find_items(query)
