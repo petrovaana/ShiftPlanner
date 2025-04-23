@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}Logged in wastages:{% endblock %}
+
+{% block content %}
+
+<h2>All logged in wastages:</h2>
+
+{% if wastages %}
+  <ul>
+    {% for wastage in wastages %}
+      <li><strong>{{ wastage.title }}</strong></li>
+      <ul>
+        {% for class in wastage.classes %}
+          <li>{{ class.title }}: {{ class.value }}</li>
+        {% endfor %}
+      </ul>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No wastage entries found.</p>
+{% endif %}
+    
+{% endblock %}
