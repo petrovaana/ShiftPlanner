@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}Log new wastage:{% endblock %}
+
+{% block content %}
+<h2>Log new wastage:</h2>
+<form action="/create_wastage" method="post">
+  <p>
+    <label for="title">Wasted item</label>: <br />
+    <input type="text" name="title" maxlength="50" required />
+  </p>
+
+  {% for class in classes %}
+  <p>
+    <label for="class{{ class }}">{{ class }}</label>: <br />
+    <select name="classes" id="class{{ class }}">
+      <option value="">(choose)</option>
+    {% for option in classes[class] %}
+      <option value="{{ class }}:{{ option }}">{{ option }}</option>
+    {% endfor %}
+    </select>
+  </p>
+  {% endfor %}
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+  <input type="submit" value="Submit" />
+</form>
+{% endblock %}
