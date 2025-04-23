@@ -8,6 +8,7 @@ This application is made specifically for restaurants and other companies possib
   - In addition, user can delete items and private events.
   - Users are able to comment on private events if something notable happened/changed during the event, and as well delete the event if needed.
   - Both search pages show the whole lists of all added private events or missing items.
+  - In addition, the app allows the user to log in any wastage and classify it based on reasons of the wastage, and view all of the wasted items. 
 
 Startup instructions:
 
@@ -16,6 +17,7 @@ pip install flask
 
 Create the database table and insert initial data:
 sqlite3 database.db < schema.sql
+sqlite3 database.db < init.sql
 
 Start the application like this:
 venv\Scripts\activate
