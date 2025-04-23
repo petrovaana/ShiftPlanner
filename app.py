@@ -11,6 +11,7 @@ import db
 import config
 import items
 import missing_items
+import wastage
 import users
 
 
@@ -42,6 +43,44 @@ def show_user(user_id):
         abort(404)
     user_items = users.get_items(user_id)
     return render_template("show_user.html", user=user, items=user_items)
+
+@app.route("/new_wastage")
+def new_wastage():
+    require_login()
+    classes = wastage.get_all_classes()
+    return render_template("new_wastage.html", classes=classes)
+
+@app.route("/show_wastage")
+def show_wastages():
+    require_login()
+    wastages = wastage.get_wastage()
+    return render_template("show_wastage.html", wastages=wastages)
+
+@app.route("/create_wastage", methods=["POST"])
+def create_wastage():
+    require_login()
+    check_csrf()
+
+    title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
+
+    all_classes = wastage.get_all_classes()
+
+    classes = []
+    for entry in request.form.getlist("classes"):
+        if entry:
+            class_title, class_value = entry.split(":")
+            if class_title not in all_classes:
+                abort(403)
+            if class_value not in all_classes[class_title]:
+                abort(403)
+            classes.append((class_title, class_value))
+
+    wastage.add_wastage(title, classes)
+
+    wastage_id = db.last_insert_id()
+    return redirect("/")
 
 @app.route("/missing/<int:missing_id>")
 def show_missing(missing_id):
@@ -85,17 +124,6 @@ def create_missing():
     missing_items.add_missing(title, date, user_id)
 
     return redirect("/")
-
-@app.route("/edit_missing/<int:missing_id>")
-def edit_missing(missing_id):
-    require_login()
-    missing = missing_items.get_missings(missing_id)
-    if not missing:
-        abort(404)
-    if missing["user_id"] != session["user_id"]:
-        abort(403)
-
-    return render_template("edit_item.html", missing=missing)
 
 @app.route("/remove_missing/<int:missing_id>", methods=["GET", "POST"])
 def remove_missing(missing_id):
