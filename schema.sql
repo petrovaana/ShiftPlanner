@@ -29,5 +29,21 @@ CREATE TABLE missing_items (
     date DATE,
     user_id INTEGER REFERENCES users
 );
+
+CREATE TABLE wastage (
+    id INTEGER PRIMARY KEY,
+    title TEXT
+);
+
+CREATE TABLE classes (
+    id INTEGER PRIMARY KEY,
+    title TEXT,
+    value TEXT
+);
+
+CREATE TABLE wastage_classes (
+    id INTEGER PRIMARY KEY,
+    wastage_id INTEGER REFERENCES wastage,
+    title TEXT,
     value TEXT
 );
